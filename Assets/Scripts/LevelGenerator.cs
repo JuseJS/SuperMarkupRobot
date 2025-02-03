@@ -42,6 +42,7 @@ public class LevelGenerator : MonoBehaviour
     private Vector3[] teleporterPositions;
     private GameObject player;
     private TagPlacementManager tagPlacementManager;
+    public Vector2 defaultWallSize = new Vector2(2, 2);
 
     // Niveles predefinidos
     private readonly LevelData[] predefinedLevels = new LevelData[]
@@ -219,7 +220,7 @@ public class LevelGenerator : MonoBehaviour
 
     private void GenerateWalls(int floorNumber, LevelData levelData)
     {
-        float wallHeight = 3f;
+        float wallHeight = 5f;
         float halfWidth = levelData.floorDimensions.x / 2;
         float halfDepth = levelData.floorDimensions.y / 2;
         float y = floorNumber * levelData.floorHeight;
@@ -232,11 +233,30 @@ public class LevelGenerator : MonoBehaviour
     }
 
     private void CreateWall(Vector3 position, Vector3 scale, Vector3 rotation, int floorNumber, string direction)
+{
+    // Instanciar el prefab del muro
+    GameObject wall = Instantiate(wallPrefab, position, Quaternion.Euler(rotation), transform);
+    wall.transform.localScale = scale;
+    wall.name = $"Wall_{floorNumber}_{direction}";
+
+    // Obtener el Renderer y el Material del muro
+    Renderer wallRenderer = wall.GetComponent<Renderer>();
+    if (wallRenderer != null && wallRenderer.sharedMaterial != null)
     {
-        GameObject wall = Instantiate(wallPrefab, position, Quaternion.Euler(rotation), transform);
-        wall.transform.localScale = scale;
-        wall.name = $"Wall_{floorNumber}_{direction}";
+        // Crear una copia del material para evitar afectar otros objetos
+        Material wallMaterial = new Material(wallRenderer.sharedMaterial);
+
+        // Calcular el factor de repetición de la textura
+        float textureRepeatX = Mathf.Max(scale.x, scale.z) / defaultWallSize.x; // Máximo entre ancho y profundidad
+        float textureRepeatY = scale.y / defaultWallSize.y; // Alto del muro
+
+        // Aplicar el factor de repetición al material
+        wallMaterial.mainTextureScale = new Vector2(textureRepeatX, textureRepeatY);
+
+        // Asignar el nuevo material al Renderer
+        wallRenderer.material = wallMaterial;
     }
+}
 
     private void GenerateTeleporters(int floorNumber, LevelData levelData)
     {

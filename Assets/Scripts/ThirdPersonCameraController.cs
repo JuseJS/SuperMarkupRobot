@@ -7,7 +7,7 @@ public class ThirdPersonCameraController : MonoBehaviour
     [Header("Camera Settings")]
     [Tooltip("Altura objetivo de la cámara")]
     public float TargetHeight = 1.375f;
-    
+
     [Tooltip("Velocidad de rotación de la cámara")]
     public float RotationSpeed = 2f;
 
@@ -33,7 +33,7 @@ public class ThirdPersonCameraController : MonoBehaviour
     {
         // Obtener referencias
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
-        
+
         if (virtualCamera == null)
         {
             Debug.LogError("No se encontró CinemachineVirtualCamera");
@@ -44,13 +44,7 @@ public class ThirdPersonCameraController : MonoBehaviour
         framingTransposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         composer = virtualCamera.GetCinemachineComponent<CinemachineComposer>();
 
-        if (framingTransposer != null)
-        {
-            framingTransposer.m_CameraDistance = CameraDistance;
-            framingTransposer.m_XDamping = Damping;
-            framingTransposer.m_YDamping = Damping;
-            framingTransposer.m_ZDamping = Damping;
-        }
+        UpdateCameraSettings();
 
         // Encontrar el player y su camera root
         player = GameObject.FindGameObjectWithTag("Player");
@@ -91,12 +85,17 @@ public class ThirdPersonCameraController : MonoBehaviour
 
         // Aplicar rotación
         player.transform.rotation = Quaternion.Euler(0, currentRotation, 0);
-        
+
         // Actualizar posición del camera root
         playerCameraRoot.position = player.transform.position + Vector3.up * TargetHeight;
     }
 
     private void OnValidate()
+    {
+        UpdateCameraSettings();
+    }
+
+    private void UpdateCameraSettings()
     {
         if (framingTransposer != null)
         {
