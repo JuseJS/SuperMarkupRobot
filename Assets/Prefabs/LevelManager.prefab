@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8666540633620264167
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7867280906311639926}
+  - component: {fileID: 7862567341728020894}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7867280906311639926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666540633620264167}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 19.357956, y: 6.2651987, z: -9.068989}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7862567341728020894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666540633620264167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeb6e00ed15828045b5f038ea685622e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levels: []
+  floorHeight: 10
+  floorDimensions: {x: 40, y: 40}
+  floorPrefab: {fileID: 8563536717806164205, guid: 318cd3f972f166540ab65b60138e4a25, type: 3}
+  wallPrefab: {fileID: 7428846467722038923, guid: ec13bbea02c423a46b49199bd3e0e576, type: 3}
+  teleporterPrefab: {fileID: 147987784472437259, guid: 0f480a70a3698774e93a94df8165906d, type: 3}
+  tagPrefab: {fileID: 51763232956832515, guid: eea2c854875c6b04fb43b1225a246e30, type: 3}
+  tagSpotPrefab: {fileID: 1371690501313267804, guid: 756461275f01fc145ba2fd7cfe6e9584, type: 3}
+  upwardIndicatorPrefab: {fileID: 6882152758681243376, guid: 554d4a29dd6cdc34d8824308dfcb78d0, type: 3}
+  downwardIndicatorPrefab: {fileID: 387209260816815959, guid: dd2d635a623171b4c9896f4fba7969bd, type: 3}
+  tagSpacing: 4
+  tagSpawnSafeZone: 3
+  wallHeight: 5
+  defaultWallSize: {x: 2, y: 2}
+  teleporterOffset: 2
+  teleporterSpacing: 8
+  teleportHeight: 1
